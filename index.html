@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Clinical Trials 101 — How Research Becomes Treatment</title>
+  <meta name="description" content="Plain‑language, evidence‑based explainer about clinical trials for Cancer Passport participants. Self‑contained, accessible, and embeddable." />
+  <style>
+    :root {
+      --bg: #0b1020;
+      --card: #10162a;
+      --soft: #1a2340;
+      --ink: #eef3ff;
+      --muted: #b6c2e4;
+      --accent: #6aa1ff;
+      --accent-2: #9be1ff;
+      --good: #5be49b;
+      --warn: #ffd166;
+      --focus: #fff08a;
+      --shadow: 0 10px 24px rgba(0,0,0,.35);
+      --radius: 18px;
+      --radius-sm: 12px;
+    }
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+      background: radial-gradient(1200px 800px at 10% 0%, #122045 0%, var(--bg) 55%);
+      color: var(--ink);
+      line-height: 1.5;
+    }
+    a { color: var(--accent-2); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .wrap { max-width: 1100px; margin: 0 auto; padding: 24px; }
+
+    /* Hero */
+    .hero {
+      background: linear-gradient(135deg, rgba(106,161,255,.2), rgba(155,225,255,.08));
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: var(--radius);
+      padding: clamp(16px, 4vw, 28px);
+      box-shadow: var(--shadow);
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 16px;
+      align-items: center;
+    }
+    @media (max-width: 880px) {
+      .hero { grid-template-columns: 1fr; }
+    }
+    h1 { font-size: clamp(1.6rem, 2.6vw, 2.2rem); margin: 0 0 8px; letter-spacing: .2px; }
+    .kicker { color: var(--muted); font-weight: 600; font-size: .95rem; text-transform: uppercase; letter-spacing: .12em; }
+    .lede { color: #d9e6ff; margin: 8px 0 0; font-size: clamp(1rem, 1.6vw, 1.1rem); }
+
+    .pillbar { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+    .pill {
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.08);
+      padding: 6px 10px; border-radius: 999px; font-size: .9rem; color: var(--muted);
+    }
+
+    /* Cards */
+    .grid { display: grid; gap: 16px; margin-top: 20px; }
+    .grid.cols-3 { grid-template-columns: repeat(3, 1fr); }
+    .grid.cols-2 { grid-template-columns: repeat(2, 1fr); }
+    @media (max-width: 900px) { .grid.cols-3 { grid-template-columns: 1fr; } }
+    @media (max-width: 720px) { .grid.cols-2 { grid-template-columns: 1fr; } }
+
+    .card {
+      background: linear-gradient(180deg, var(--card), var(--soft));
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: var(--radius-sm);
+      padding: 18px;
+      box-shadow: var(--shadow);
+    }
+    .card h3 { margin: 0 0 6px; font-size: 1.1rem; letter-spacing: .2px; }
+    .card p { margin: 6px 0 0; color: var(--muted); }
+
+    .icon { width: 28px; height: 28px; display: inline-block; vertical-align: middle; margin-right: 8px; }
+
+    .btnbar { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 14px; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 10px 14px; border-radius: 12px;
+      background: #17305f; color: #e7f0ff; border: 1px solid rgba(255,255,255,.1);
+    }
+    .btn.secondary { background: #123057; color: #d5e5ff; }
+    .btn:focus { outline: 3px solid var(--focus); outline-offset: 2px; }
+
+    .note {
+      background: #0f1a34; border-left: 4px solid var(--accent);
+      padding: 12px 14px; border-radius: 10px; color: #d6e2ff; font-size: .95rem;
+    }
+
+    /* FAQ */
+    details { background: #0f1a34; border: 1px solid rgba(255,255,255,.08); border-radius: 12px; padding: 12px 14px; }
+    details + details { margin-top: 10px; }
+    summary { cursor: pointer; font-weight: 600; }
+    summary::-webkit-details-marker { display:none; }
+
+    /* Footer */
+    footer { margin: 28px 0 8px; color: var(--muted); font-size: .9rem; }
+    .sources a { word-break: break-word; }
+
+    /* Motion preferences */
+    @media (prefers-reduced-motion: reduce) {
+      * { animation: none !important; transition: none !important; }
+    }
+  </style>
+</head>
+<body>
+  <main class="wrap" role="main">
+    <section class="hero" aria-labelledby="title">
+      <div>
+        <div class="kicker">Clinical Trials 101</div>
+        <h1 id="title">How research becomes treatment</h1>
+        <p class="lede">Clinical trials are carefully designed studies that test new ways to prevent, detect, or treat cancer. Each phase builds on what was learned before — from safety (Phase I) to effectiveness (Phase III). Taking part helps doctors improve future care, and participation is always voluntary.</p>
+        <div class="pillbar" aria-label="Key points">
+          <div class="pill" title="IRB oversight">IRB‑approved & ethics‑reviewed</div>
+          <div class="pill" title="Participant rights">You can withdraw at any time</div>
+          <div class="pill" title="Safety monitoring">Close medical monitoring</div>
+        </div>
+        <div class="btnbar" role="group" aria-label="Learn more">
+          <a class="btn" href="#learn" aria-describedby="learn-desc">Learn the basics</a>
+          <a class="btn secondary" href="#faq">Common questions</a>
+        </div>
+        <p id="learn-desc" class="visually-hidden">Jump to the section that explains phases, safety, and benefits/risks.</p>
+      </div>
+      <div class="card" aria-label="Intro video">
+        <h3 style="display:flex;align-items:center;gap:8px;margin:0 0 10px">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 5a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v1l3-2v14l-3-2v1a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V5Z" stroke="#9be1ff" stroke-width="1.5"/></svg>
+          Watch: What are clinical trials?
+        </h3>
+        <div style="position:relative;padding-top:56.25%;border-radius:12px;overflow:hidden;background:#0b1328">
+          <!-- Official NCI explainer (publicly available). Replace src if needed. -->
+          <iframe title="NCI: What Are Clinical Trials?" width="560" height="315" style="position:absolute;inset:0;border:0;" src="https://www.youtube.com/embed/9S0OqS8zYvQ" allow="accelerometer; autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>
+        </div>
+        <p style="margin-top:10px;color:var(--muted);font-size:.95rem">Source: National Cancer Institute</p>
+      </div>
+    </section>
+
+    <section id="learn" class="grid cols-3" aria-label="Core concepts">
+      <article class="card">
+        <h3>
+          <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="9" stroke="#6aa1ff" stroke-width="1.5"/><path d="M8 12h8M12 8v8" stroke="#6aa1ff" stroke-width="1.5"/></svg>
+          What is a clinical trial?
+        </h3>
+        <p>It’s a research study that tests new ways to prevent, find, or treat cancer. Trials follow a written plan (a protocol), are reviewed by ethics boards, and include careful safety monitoring.</p>
+      </article>
+      <article class="card">
+        <h3>
+          <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 15c3-6 13-6 16 0" stroke="#9be1ff" stroke-width="1.5"/><circle cx="7" cy="16" r="2" fill="#9be1ff"/><circle cx="17" cy="16" r="2" fill="#9be1ff"/></svg>
+          Trial phases
+        </h3>
+        <p><strong>Phase I</strong> studies test safety and dose. <strong>Phase II</strong> looks for early signs of effectiveness and side effects. <strong>Phase III</strong> compares the new approach to the current standard to confirm benefit and risk.</p>
+      </article>
+      <article class="card">
+        <h3>
+          <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3" y="3" width="18" height="14" rx="2" stroke="#5be49b" stroke-width="1.5"/><path d="M7 20h10" stroke="#5be49b" stroke-width="1.5"/></svg>
+          Your rights & safety
+        </h3>
+        <p>You’ll receive an <em>informed consent</em> form explaining the purpose, procedures, risks, benefits, and alternatives. Asking questions is encouraged, and you can stop at any time without affecting your usual care.</p>
+      </article>
+    </section>
+
+    <section class="grid cols-2" aria-label="Benefits and risks">
+      <article class="card">
+        <h3>
+          <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3v18M3 12h18" stroke="#5be49b" stroke-width="1.5"/></svg>
+          Potential benefits
+        </h3>
+        <p><ul>
+          <li>Access to new approaches not yet widely available</li>
+          <li>Careful monitoring by a research team</li>
+          <li>Helping improve future treatments for others</li>
+        </ul></p>
+      </article>
+      <article class="card">
+        <h3>
+          <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 5v14M5 12h14" stroke="#ffd166" stroke-width="1.5"/></svg>
+          Potential risks
+        </h3>
+        <p><ul>
+          <li>Unknown or unexpected side effects</li>
+          <li>New treatment may not work better than standard care</li>
+          <li>Extra visits, tests, or time commitments</li>
+        </ul></p>
+      </article>
+    </section>
+
+    <section id="faq" class="card" aria-label="Common questions" style="margin-top:20px">
+      <h3 style="margin-top:0">Common questions</h3>
+      <details>
+        <summary>How do I find trials that may fit me?</summary>
+        <p>Talk with your oncology team and explore <a href="https://www.cancer.gov/about-cancer/treatment/clinical-trials/search" target="_blank" rel="noopener">NCI’s trial search</a> or <a href="https://clinicaltrials.gov/" target="_blank" rel="noopener">ClinicalTrials.gov</a>. They list eligibility criteria and contacts.</p>
+      </details>
+      <details>
+        <summary>Will I get a placebo?</summary>
+        <p>In cancer trials, placebos are <em>rarely</em> used alone. If a placebo is part of the design, it’s typically added to standard therapy—never in place of appropriate care.</p>
+      </details>
+      <details>
+        <summary>Does joining a trial affect my regular care?</summary>
+        <p>Your usual care team remains involved. Trials are designed to complement standard care, and you can withdraw if it’s not right for you.</p>
+      </details>
+      <details>
+        <summary>What does “randomized” mean?</summary>
+        <p>Participants are assigned by chance to one of the study groups to make fair comparisons. Randomization helps researchers learn which approach works best.</p>
+      </details>
+    </section>
+
+    <section class="card" aria-label="Trusted resources" style="margin-top:20px">
+      <h3 style="margin-top:0">Trusted resources</h3>
+      <ul>
+        <li><a href="https://www.cancer.gov/about-cancer/treatment/clinical-trials/what-are-trials" target="_blank" rel="noopener">National Cancer Institute — Understanding Clinical Trials</a></li>
+        <li><a href="https://www.cancer.net/navigating-cancer-care/how-cancer-treated/clinical-trials" target="_blank" rel="noopener">ASCO Cancer.Net — Patient Guide to Clinical Trials</a></li>
+        <li><a href="https://clinicaltrials.gov/" target="_blank" rel="noopener">ClinicalTrials.gov — Find and learn about trials</a></li>
+      </ul>
+      <p class="note" role="note">This page is educational only. It does not recruit for any specific study and does not collect data.</p>
+    </section>
+
+    <footer>
+      <p class="sources">Evidence‑based content adapted from the National Cancer Institute and ASCO public patient resources (accessed 2025). Always discuss trial options with your oncology team.</p>
+    </footer>
+  </main>
+</body>
+</html>
