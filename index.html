@@ -1,384 +1,257 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Clinical Trials: What You Need to Know</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Clinical Trials 101 • Cancer Passport</title>
+  <style>
+    :root{
+      --ink:#1d2b3a;
+      --muted:#5b6b7b;
+      --brand:#3c7ff0;
+      --brand-2:#7a5cf5;
+      --bg:#f7f9ff;
+      --card:#ffffff;
+      --pill:#e9f0ff;
+      --ok:#12b886;
+      --warn:#ef4444;
+      --ring: 0 0 0 3px rgba(60,127,240,.25);
+      --radius:18px;
+      --shadow:0 10px 30px rgba(19, 33, 68, .08);
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0; font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      color:var(--ink); background:var(--bg);
+    }
+    .wrap{max-width:1080px; margin:auto; padding:28px 20px 64px}
+    /* soft background waves */
+    .bg{
+      position:fixed; inset:-10% -10% auto -10%; height:340px; z-index:-1; pointer-events:none;
+      background:
+        radial-gradient(60% 60% at 85% 10%, rgba(123,92,245,.12), transparent 60%),
+        radial-gradient(60% 60% at 10% 20%, rgba(60,127,240,.14), transparent 60%);
+      filter:blur(0.2px);
+    }
+    header.hero{
+      background:linear-gradient(180deg, #ffffffcc, #ffffffa0);
+      backdrop-filter: saturate(1.1) blur(2px);
+      border-radius:var(--radius);
+      padding:28px;
+      box-shadow:var(--shadow);
+      display:grid; grid-template-columns:1.3fr .9fr; gap:20px; align-items:center;
+    }
+    @media (max-width:900px){ header.hero{grid-template-columns:1fr} }
+    .eyebrow{display:inline-block; font-weight:600; color:var(--brand); background:var(--pill); padding:6px 12px; border-radius:999px; font-size:.85rem}
+    h1{margin:.35rem 0 .25rem; font-size:2rem; letter-spacing:-.01em}
+    .sub{color:var(--muted); max-width:60ch}
+    .illustration{
+      aspect-ratio: 4/3; border-radius:14px; background:#fff; display:grid; place-items:center; box-shadow:var(--shadow); position:relative; overflow:hidden;
+    }
+    /* friendly abstract DNA/chart illustration */
+    .illus{
+      width:88%; height:88%;
+      background:
+        radial-gradient(16px 16px at 15% 20%, #ffd166 50%, transparent 51%),
+        radial-gradient(16px 16px at 78% 25%, #06d6a0 50%, transparent 51%),
+        radial-gradient(16px 16px at 32% 76%, #ef476f 50%, transparent 51%),
+        linear-gradient(120deg, #3c7ff020 40%, #7a5cf520 40%) top/100% 50% no-repeat;
+      position:relative; border-radius:12px;
+    }
+    .illus:before, .illus:after{
+      content:""; position:absolute; inset:auto auto 12% 50%; width:66%; height:12px; transform:translateX(-50%) rotate(-15deg);
+      background:repeating-linear-gradient(90deg, #3c7ff0, #3c7ff0 12px, transparent 12px, transparent 20px);
+      border-radius:8px;
+    }
+    .illus:after{ inset:auto auto 28% 50%; transform:translateX(-50%) rotate(15deg); background:repeating-linear-gradient(90deg,#7a5cf5,#7a5cf5 12px,transparent 12px,transparent 20px) }
 
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            line-height: 1.5;
-            color: #333;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            padding: 20px;
-        }
-
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
-            background: white;
-            border-radius: 16px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-            overflow: hidden;
-        }
-
-        .header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 30px;
-            text-align: center;
-        }
-
-        .header h1 {
-            font-size: 2em;
-            margin-bottom: 8px;
-            font-weight: 700;
-        }
-
-        .header p {
-            font-size: 1.05em;
-            opacity: 0.95;
-        }
-
-        .content {
-            padding: 35px 30px;
-        }
-
-        .section {
-            margin-bottom: 35px;
-        }
-
-        .section h2 {
-            color: #667eea;
-            font-size: 1.4em;
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding-bottom: 8px;
-            border-bottom: 2px solid #e0e7ff;
-        }
-
-        .icon {
-            width: 40px;
-            height: 40px;
-            min-width: 40px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 20px;
-        }
-
-        .compact-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 15px;
-            margin: 15px 0;
-        }
-
-        .compact-card {
-            background: #f8f9ff;
-            padding: 18px;
-            border-radius: 10px;
-            border-left: 4px solid #667eea;
-        }
-
-        .compact-card h4 {
-            color: #667eea;
-            font-size: 1.05em;
-            margin-bottom: 8px;
-            font-weight: 600;
-        }
-
-        .compact-card p {
-            color: #555;
-            font-size: 0.9em;
-            line-height: 1.4;
-        }
-
-        .quick-facts {
-            background: #f0fdf4;
-            border: 2px solid #10b981;
-            border-radius: 10px;
-            padding: 20px;
-            margin: 15px 0;
-        }
-
-        .quick-facts ul {
-            list-style: none;
-            margin-top: 10px;
-        }
-
-        .quick-facts li {
-            padding: 8px 0;
-            padding-left: 25px;
-            position: relative;
-            font-size: 0.95em;
-        }
-
-        .quick-facts li:before {
-            content: "✓";
-            position: absolute;
-            left: 0;
-            color: #10b981;
-            font-weight: bold;
-            font-size: 1.2em;
-        }
-
-        .myth-reality {
-            background: #fff5f5;
-            border-radius: 10px;
-            padding: 20px;
-            margin: 15px 0;
-        }
-
-        .myth-reality .myth-item {
-            margin-bottom: 15px;
-        }
-
-        .myth-reality .myth-item:last-child {
-            margin-bottom: 0;
-        }
-
-        .myth-label {
-            color: #ef4444;
-            font-weight: 600;
-            font-size: 0.85em;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .reality-label {
-            color: #10b981;
-            font-weight: 600;
-            font-size: 0.85em;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-top: 5px;
-        }
-
-        .myth-reality p {
-            font-size: 0.9em;
-            margin-top: 3px;
-            color: #555;
-        }
-
-        .stat-highlight {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 20px;
-            border-radius: 10px;
-            text-align: center;
-            margin: 15px 0;
-        }
-
-        .stat-highlight .number {
-            font-size: 2.5em;
-            font-weight: 700;
-            display: block;
-            line-height: 1;
-        }
-
-        .stat-highlight p {
-            font-size: 0.95em;
-            margin-top: 10px;
-            opacity: 0.95;
-        }
-
-        .questions-box {
-            background: #f8f9ff;
-            padding: 20px;
-            border-radius: 10px;
-            border: 2px solid #e0e7ff;
-        }
-
-        .questions-box ul {
-            list-style: none;
-            padding: 0;
-        }
-
-        .questions-box li {
-            padding: 10px 0;
-            border-bottom: 1px solid #e0e7ff;
-            font-size: 0.9em;
-            color: #555;
-        }
-
-        .questions-box li:last-child {
-            border-bottom: none;
-        }
-
-        .cta-box {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 25px;
-            border-radius: 10px;
-            text-align: center;
-            margin: 25px 0 0 0;
-        }
-
-        .cta-box p {
-            font-size: 1.05em;
-            line-height: 1.5;
-        }
-
-        .references {
-            background: #f8f9fa;
-            padding: 20px;
-            border-radius: 10px;
-            margin-top: 30px;
-            font-size: 0.8em;
-        }
-
-        .references h3 {
-            color: #333;
-            margin-bottom: 12px;
-            font-size: 1em;
-        }
-
-        .references ol {
-            padding-left: 18px;
-        }
-
-        .references li {
-            margin-bottom: 8px;
-            color: #555;
-            line-height: 1.4;
-        }
-
-        @media (max-width: 768px) {
-            .header h1 {
-                font-size: 1.6em;
-            }
-
-            .compact-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .content {
-                padding: 25px 20px;
-            }
-        }
-    </style>
+    /* section header */
+    .section-head{display:flex; justify-content:space-between; align-items:center; margin:36px 4px 14px}
+    .section-head h2{margin:0; font-size:1.25rem; letter-spacing:.01em}
+    .cta-pill{
+      border:1.5px solid #d6e4ff; background:#f3f6ff; color:#2551b7; padding:8px 14px; border-radius:999px; font-weight:600; font-size:.9rem; text-decoration:none;
+    }
+    .cta-pill:hover{box-shadow:var(--ring)}
+    /* grid of content cards */
+    .grid{display:grid; grid-template-columns:1fr 1fr; gap:22px}
+    @media (max-width:900px){ .grid{grid-template-columns:1fr} }
+    .card{
+      background:var(--card); border-radius:var(--radius); box-shadow:var(--shadow);
+      overflow:hidden; display:grid; grid-template-rows:auto 1fr auto;
+    }
+    .card .media{background:#fff6; min-height:170px; display:grid; place-items:center}
+    .card .media .thumb{width:88%; height:120px; border-radius:12px; background:
+        conic-gradient(from 180deg at 55% 45%, #ffd166, #ef476f, #06d6a0, #118ab2, #ffd166);
+      opacity:.9}
+    .card .body{padding:18px 18px 8px}
+    .card .kicker{color:#64748b; font-weight:700; text-transform:uppercase; letter-spacing:.06em; font-size:.72rem}
+    .card h3{margin:.2rem 0 .35rem; font-size:1.05rem}
+    .card p{margin:0; color:var(--muted); font-size:.95rem}
+    .card .footer{
+      display:flex; justify-content:space-between; align-items:center; padding:12px 16px 16px;
+    }
+    .read{
+      color:#2551b7; font-weight:700; text-decoration:none; display:inline-flex; align-items:center; gap:6px;
+    }
+    .meta{color:#8aa0bf; font-size:.85rem}
+    .icon-btn{
+      border:none; background:transparent; font:inherit; color:#2551b7; display:inline-flex; align-items:center; gap:6px; cursor:pointer
+    }
+    .icon-btn:focus-visible{outline:none; box-shadow:var(--ring)}
+    /* two-up features */
+    .two{display:grid; grid-template-columns:1fr 1fr; gap:22px; margin-top:22px}
+    @media (max-width:900px){ .two{grid-template-columns:1fr} }
+    .feature{
+      background:var(--card); border-radius:var(--radius); box-shadow:var(--shadow); padding:22px;
+    }
+    .feature h4{margin:0 0 8px; color:#2551b7}
+    .list{margin:8px 0 0; padding:0; list-style:none}
+    .list li{padding:10px 0 10px 28px; position:relative; color:var(--muted)}
+    .list li:before{
+      content:""; position:absolute; left:0; top:13px; width:16px; height:16px; border-radius:4px; background:#eaf2ff;
+      box-shadow: inset 0 0 0 2px #cfe0ff;
+    }
+    .list .ok:before{background:#e9fbf3; box-shadow: inset 0 0 0 2px #baf0dc}
+    .badge{display:inline-block; padding:4px 8px; border-radius:999px; font-size:.78rem; font-weight:700}
+    .good{background:#e9fbf3; color:#085e47}
+    .myth{background:#fff1f1; color:#8a1f1f}
+    details.mythbox{
+      background:#fff8f8; border-radius:14px; padding:16px 18px; border:1.5px solid #ffd7d7;
+    }
+    details.mythbox summary{cursor:pointer; list-style:none; font-weight:700}
+    details.mythbox[open]{outline:none; box-shadow:var(--ring)}
+    .stat{
+      background:linear-gradient(135deg, #3c7ff0, #7a5cf5); color:white; border-radius:14px; padding:20px; text-align:center;
+    }
+    .stat b{display:block; font-size:2.2rem; margin-bottom:4px}
+    footer.credits{margin-top:26px; color:#7b8aa1; font-size:.85rem}
+  </style>
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <h1>Clinical Trials: Quick Guide</h1>
-            <p>What you need to know about participating in cancer research</p>
-        </div>
+<div class="bg"></div>
+<div class="wrap">
 
-        <div class="content">
-            <div class="section">
-                <h2><span class="icon">💡</span> What You Might Gain</h2>
-                <div class="compact-grid">
-                    <div class="compact-card">
-                        <h4>Early Access</h4>
-                        <p>Try new treatments before they're widely available<sup>1</sup></p>
-                    </div>
-                    <div class="compact-card">
-                        <h4>Expert Care</h4>
-                        <p>More frequent monitoring by specialists<sup>2</sup></p>
-                    </div>
-                    <div class="compact-card">
-                        <h4>Active Role</h4>
-                        <p>Help advance treatments for future patients<sup>3</sup></p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="section">
-                <h2><span class="icon">🛡️</span> Your Protections</h2>
-                <div class="quick-facts">
-                    <ul>
-                        <li>You can leave anytime without affecting your regular care<sup>4</sup></li>
-                        <li>Independent review boards monitor all studies for safety<sup>5</sup></li>
-                        <li>You'll get full information about risks and benefits upfront<sup>6</sup></li>
-                        <li>Your medical information stays private under HIPAA<sup>7</sup></li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="section">
-                <h2><span class="icon">❓</span> Common Concerns</h2>
-
-                <div class="myth-reality">
-                    <div class="myth-item">
-                        <div class="myth-label">❌ Myth</div>
-                        <p>"I'll just get a placebo with no real treatment"</p>
-                        <div class="reality-label">✓ Reality</div>
-                        <p>Cancer trials rarely use placebos alone. You'll typically receive at least the standard treatment, often with the new therapy added.<sup>8</sup></p>
-                    </div>
-                </div>
-
-                <div style="margin-top: 15px;">
-                    <p style="font-size: 0.95em; color: #555; margin-bottom: 8px;"><strong>Costs:</strong> The study treatment is usually free. Insurance typically covers routine care, just as it would outside the trial.<sup>9</sup></p>
-                    <p style="font-size: 0.95em; color: #555;"><strong>Time:</strong> Varies by study. Your team will explain the schedule before you decide.<sup>10</sup></p>
-                </div>
-            </div>
-
-            <div class="section">
-                <h2><span class="icon">📊</span> Impact</h2>
-                <div class="stat-highlight">
-                    <span class="number">96%</span>
-                    <p>of cancer patients in trials say they would recommend participation to others facing similar decisions<sup>11</sup></p>
-                </div>
-                <p style="font-size: 0.9em; color: #555; margin-top: 15px;">Recent breakthroughs like immunotherapy and targeted treatments came from clinical trials. Participants helped make these life-saving options available.<sup>12,13</sup></p>
-            </div>
-
-            <div class="section">
-                <h2><span class="icon">🗣️</span> Questions to Ask</h2>
-                <div class="questions-box">
-                    <ul>
-                        <li>What is the purpose of this study?</li>
-                        <li>What are my other treatment options?</li>
-                        <li>What are the possible risks and benefits for me?</li>
-                        <li>What will my schedule look like?</li>
-                        <li>What costs might I have?</li>
-                        <li>Can I still see my regular doctor?</li>
-                        <li>What happens if I want to stop?</li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="section">
-                <h2><span class="icon">🌍</span> Diversity Matters</h2>
-                <p style="font-size: 0.95em; color: #555;">Trials need participants from all backgrounds to ensure treatments work for everyone. If you're from an underrepresented group, your participation is especially valuable for advancing equitable care.<sup>14,15</sup></p>
-            </div>
-
-            <div class="cta-box">
-                <p><strong>This is your decision.</strong> Take time to learn about your options and discuss them with your care team and loved ones. There's no pressure to decide right away.</p>
-            </div>
-
-            <div class="references">
-                <h3>References</h3>
-                <ol>
-                    <li>American Cancer Society. (2023). Clinical Trials: What You Need to Know.</li>
-                    <li>Unger, J. M., et al. (2019). Barriers to Cancer Clinical Trial Participation. J Natl Cancer Inst, 111(3), 245-255.</li>
-                    <li>Institute of Medicine. (2013). Public Engagement and Clinical Trials. National Academies Press.</li>
-                    <li>45 CFR 46, Protection of Human Subjects (Common Rule). HHS.</li>
-                    <li>21 CFR 56, Institutional Review Boards. FDA.</li>
-                    <li>National Cancer Institute. (2020). Informed Consent for Clinical Trials.</li>
-                    <li>HIPAA Privacy Rule, 45 CFR Parts 160 and 164.</li>
-                    <li>Miller, F. G., & Joffe, S. (2011). Equipoise and Randomized Clinical Trials. N Engl J Med, 364(5), 476-480.</li>
-                    <li>Meropol, N. J., et al. (2003). Barriers to Clinical Trial Participation. J Natl Cancer Inst Monogr, 2003(31), 122-125.</li>
-                    <li>ASCO. (2022). Clinical Trials: Understanding Your Options.</li>
-                    <li>Godskesen, T., et al. (2015). A systematic review of attitudes towards participation in cancer clinical trials. Int J Technol Assess Health Care, 31(3), 168-174.</li>
-                    <li>Haslam, A., & Prasad, V. (2019). Checkpoint Inhibitor Immunotherapy. JAMA Netw Open, 2(5), e192535.</li>
-                    <li>Prasad, V., et al. (2016). Precision Oncology: Origins, Optimism, and Potential. Lancet Oncol, 17(2), e81-e86.</li>
-                    <li>Loree, J. M., et al. (2019). Disparity of Race Reporting in Clinical Trials. JAMA Oncol, 5(10), e191870.</li>
-                    <li>Chen, M. S., et al. (2014). Enhancing Minority Participation in Clinical Trials. Cancer, 120(S7), 1091-1096.</li>
-                </ol>
-            </div>
-        </div>
+  <header class="hero" aria-labelledby="title">
+    <div>
+      <span class="eyebrow">Clinical Trials 101</span>
+      <h1 id="title">A quick, friendly guide for cancer patients</h1>
+      <p class="sub">Understand how trials work, your rights and protections, and how your participation can help discover better treatments for everyone.</p>
     </div>
+    <div class="illustration" aria-hidden="true">
+      <div class="illus"></div>
+    </div>
+  </header>
+
+  <!-- Section A: “lanes” like your screenshot -->
+  <div class="section-head">
+    <h2>Explore Topics</h2>
+    <a class="cta-pill" href="#">All Related Insights</a>
+  </div>
+
+  <div class="grid" role="list">
+    <!-- Card 1 -->
+    <article class="card" role="listitem">
+      <div class="media"><div class="thumb" aria-hidden="true"></div></div>
+      <div class="body">
+        <div class="kicker">Getting Started</div>
+        <h3>What is a clinical trial?</h3>
+        <p>Trials test new ways to prevent, diagnose, or treat cancer. Learn how phases, placebos, and safety oversight really work.</p>
+      </div>
+      <div class="footer">
+        <span class="meta">3 min • Updated Oct 2025</span>
+        <a class="read" href="#">Read more ▸</a>
+      </div>
+    </article>
+
+    <!-- Card 2 -->
+    <article class="card" role="listitem">
+      <div class="media"><div class="thumb" aria-hidden="true"></div></div>
+      <div class="body">
+        <div class="kicker">Your Rights</div>
+        <h3>Consent, privacy & protections</h3>
+        <p>Independent boards, informed consent, and HIPAA safeguards are in place to protect you at every step.</p>
+      </div>
+      <div class="footer">
+        <span class="meta">2 min • Plain-language</span>
+        <a class="read" href="#">Read more ▸</a>
+      </div>
+    </article>
+
+    <!-- Card 3 -->
+    <article class="card" role="listitem">
+      <div class="media"><div class="thumb" aria-hidden="true"></div></div>
+      <div class="body">
+        <div class="kicker">For You</div>
+        <h3>Benefits & practical tips</h3>
+        <p>Potential access to new therapies, close monitoring, and questions to ask your care team before deciding.</p>
+      </div>
+      <div class="footer">
+        <span class="meta">4 min • Checklist</span>
+        <a class="read" href="#">Read more ▸</a>
+      </div>
+    </article>
+
+    <!-- Card 4 -->
+    <article class="card" role="listitem">
+      <div class="media"><div class="thumb" aria-hidden="true"></div></div>
+      <div class="body">
+        <div class="kicker">Equity</div>
+        <h3>Why diversity in trials matters</h3>
+        <p>When people from every background participate, treatments can be proven to work for everyone.</p>
+      </div>
+      <div class="footer">
+        <span class="meta">2 min • Inclusive</span>
+        <a class="read" href="#">Read more ▸</a>
+      </div>
+    </article>
+  </div>
+
+  <!-- Section B: compact “feature” blocks -->
+  <div class="two">
+    <section class="feature" aria-labelledby="gain">
+      <h4 id="gain">What you might gain</h4>
+      <ul class="list">
+        <li class="ok"><strong>Early access</strong> to promising treatments (when eligible).</li>
+        <li class="ok"><strong>Expert care</strong> and more frequent monitoring by specialists.</li>
+        <li class="ok"><strong>A voice</strong> in research that helps future patients.</li>
+      </ul>
+    </section>
+
+    <section class="feature" aria-labelledby="protect">
+      <h4 id="protect">Your protections</h4>
+      <ul class="list">
+        <li><span class="badge good">You decide</span> Join or leave anytime—your regular care won’t be affected.</li>
+        <li><span class="badge good">IRB oversight</span> Independent boards review study safety and ethics.</li>
+        <li><span class="badge good">Privacy</span> Your health information is protected under HIPAA.</li>
+      </ul>
+    </section>
+  </div>
+
+  <!-- Section C: Myth → Reality accordion -->
+  <div class="two">
+    <section class="feature" aria-labelledby="myth">
+      <h4 id="myth">Common concern</h4>
+      <details class="mythbox">
+        <summary><span class="badge myth">Myth</span> “I might get only a placebo.”</summary>
+        <p style="margin:10px 0 0;color:var(--muted)"><strong>Reality:</strong> Cancer trials rarely use a placebo alone.
+          You’ll typically receive at least the standard-of-care treatment, with the new therapy added when randomized.</p>
+      </details>
+    </section>
+
+    <section class="feature" aria-labelledby="impact">
+      <h4 id="impact">Impact</h4>
+      <div class="stat" role="img" aria-label="96 percent of patients would recommend participation">
+        <b>96%</b>
+        of cancer patients in trials would recommend participation to others.
+      </div>
+      <p style="color:#e6eaff; margin:.5rem 0 0; font-size:.9rem">Source: peer-reviewed syntheses of patient-reported trial experiences.</p>
+    </section>
+  </div>
+
+  <footer class="credits">
+    Educational content • Cancer Passport. This page is informational and not medical advice. Talk with your care team about your options.
+  </footer>
+</div>
+
 </body>
 </html>
